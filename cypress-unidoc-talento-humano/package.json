@@ -1,0 +1,12 @@
+{
+  "name": "cypress-unidoc-talento-humano",
+  "version": "1.0.0",
+  "description": "Pruebas funcionales automatizadas de UniDoc (Nova) - rol Talento Humano",
+  "scripts": {
+    "cy:open": "cypress open",
+    "cy:run": "cypress run --browser chrome"
+  },
+  "devDependencies": {
+    "cypress": "^13.17.0"
+  }
+}
