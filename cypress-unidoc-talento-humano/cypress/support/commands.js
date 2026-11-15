@@ -12,17 +12,22 @@ export const SEL = {
 };
 
 
-// Inicia sesión con las credenciales de cypress.env.json (nunca escritas en el código).
-Cypress.Commands.add('login', () => {
-  const user = Cypress.env('TH_USER');
-  const pass = Cypress.env('TH_PASS');
-  if (!user || !pass) throw new Error('Faltan TH_USER / TH_PASS en cypress.env.json');
+// Escribe el correo y la contraseña guardados en cypress.env.json.
+// Si se le pasa otra clave, escribe esa (para probar una clave incorrecta).
+Cypress.Commands.add('escribirDatos', (otraClave) => {
+  cy.env(['TH_USER', 'TH_PASS']).then(({ TH_USER, TH_PASS }) => {
+    if (!TH_USER || !TH_PASS) throw new Error('Faltan TH_USER / TH_PASS en cypress.env.json');
+    cy.get(SEL.usuario).first().type(TH_USER);
+    cy.get(SEL.clave).first().type(otraClave || TH_PASS, { log: false });
+  });
+});
 
-  cy.session([user], () => {
+// Inicia sesión una vez y la reutiliza en las demás pruebas.
+Cypress.Commands.add('login', () => {
+  cy.session('talento-humano', () => {
     cy.visit('/convocatorias-app/inicio-sesion');
-    cy.get(SEL.usuario).first().type(user);
-    cy.get(SEL.clave).first().type(pass, { log: false });
+    cy.escribirDatos();
     cy.get(SEL.botonIngresar).first().click();
-    cy.url().should('not.include', 'login'); // AJUSTAR si la URL de inicio es otra
+    cy.url().should('not.include', 'inicio-sesion');
   });
 });

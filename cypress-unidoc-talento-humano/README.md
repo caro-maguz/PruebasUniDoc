@@ -14,7 +14,7 @@ cd cypress-unidoc-talento-humano
 npm install
 ```
 
-Copie `cypress.env.example.json` como `cypress.env.json` y complete usuario, contraseña y rutas.
+Copie `cypress.env.example.json` como `cypress.env.json` y complete el usuario y la contraseña.
 **`cypress.env.json` está en `.gitignore`: nunca lo suba al repositorio.**
 
 ## Ejecución
@@ -28,9 +28,8 @@ npx cypress run --browser chrome    # modo consola (genera videos y capturas)
 cypress/
   e2e/
     01_autenticacion.cy.js     CP-TH-01 a CP-TH-04
-    02_consulta_listado.cy.js  CP-TH-05 a CP-TH-07
-    03_documentos.cy.js        CP-TH-08
-    04_permisos.cy.js          CP-TH-11 y CP-TH-12
+    02_consulta_listado.cy.js  CP-TH-05 y CP-TH-06
+    03_permisos.cy.js          CP-TH-07
   support/
     commands.js                comando cy.login y selectores
     e2e.js
@@ -38,7 +37,7 @@ cypress.config.js              baseUrl de la aplicación
 cypress.env.example.json       plantilla de variables (sin credenciales reales)
 ```
 
-CP-TH-09 y CP-TH-10 se ejecutan manualmente porque modifican datos.
+Los casos CP-TH-09 a CP-TH-21 se hacen manualmente.
 
 ## Integrantes
 - Lisbeth Moore Salinas · Astrid Martínez Guzmán · Manuel Villaquiran Salazar

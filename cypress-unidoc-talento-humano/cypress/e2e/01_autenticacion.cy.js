@@ -3,8 +3,7 @@ import { SEL } from '../support/commands';
 describe('RF-TH-01 Autenticación - rol Talento Humano', () => {
   it('CP-TH-01 Inicio de sesión con credenciales válidas', () => {
     cy.visit('/convocatorias-app/inicio-sesion');
-    cy.get(SEL.usuario).first().type(Cypress.env('TH_USER'));
-    cy.get(SEL.clave).first().type(Cypress.env('TH_PASS'), { log: false });
+    cy.escribirDatos();
     cy.get(SEL.botonIngresar).first().click();
     cy.url().should('not.include', 'login'); // AJUSTAR
     cy.contains(/talento humano/i).should('be.visible'); // AJUSTAR: texto que confirme el rol
@@ -12,8 +11,7 @@ describe('RF-TH-01 Autenticación - rol Talento Humano', () => {
 
   it('CP-TH-02 Inicio de sesión con contraseña incorrecta', () => {
     cy.visit('/convocatorias-app/inicio-sesion');
-    cy.get(SEL.usuario).first().type(Cypress.env('TH_USER'));
-    cy.get(SEL.clave).first().type('ClaveIncorrecta123');
+    cy.escribirDatos('ClaveIncorrecta123');
     cy.get(SEL.botonIngresar).first().click();
     cy.get(SEL.mensajeError).should('be.visible');
     cy.url().should('include', '/convocatorias-app/inicio-sesion'); 
@@ -43,8 +41,7 @@ describe('RF-TH-01 Autenticación - rol Talento Humano', () => {
     // Iniciar sesión
     cy.visit('/convocatorias-app/inicio-sesion');
 
-    cy.get(SEL.usuario).first().type(Cypress.env('TH_USER'));
-    cy.get(SEL.clave).first().type(Cypress.env('TH_PASS'), { log: false });
+    cy.escribirDatos();
     cy.get(SEL.botonIngresar).first().click();
 
     // Confirmar inicio de sesión
